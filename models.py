@@ -36,15 +36,27 @@ class Meditation:
 
         Meditation.num_of_meditations += 1
 
-    def finish_meditation(self, duration_minutes):
-        self.time_end = self.time_start + datetime.timedelta(minutes=duration_minutes)
-        print('Помедитировали..')
+    def describe_session(self):
+        duration = (self.time_end - self.time_start).total_seconds() // 60
+        print('Meditation №{}\nDuration: {} min.'.format(self.id, duration))
 
-    def start_meditation(self, duration_minutes):
-        print('Начинаем медитировать {} минут..'.format(duration_minutes))
+    def finish_meditation(self):
+        msg = input("Time is up..\nEnter 'OK' when you are ready to finish your session: ")
+        if msg.lower() == 'ok':
+            self.time_end = datetime.datetime.now()
+        else:
+            finish_meditation()
+
+    def ask_for_duration(self):
+        duration_minutes = input('How long are you going to meditate? (min): ')
+        return duration_minutes
+
+    def start_meditation(self):
+        duration_minutes = self.ask_for_duration()
+        print('Meditation for {} min. has started..'.format(duration_minutes))
         self.time_start = datetime.datetime.now()
-        time.sleep(duration_minutes*60)
-        Meditation.finish_meditation(self, duration_minutes)
+        time.sleep(int(duration_minutes)*60)
+        Meditation.finish_meditation(self)
 
     def __repr__(self):
         return '--> Meditation {}'.format(self.id, self.time_start, self.time_end)

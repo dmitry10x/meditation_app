@@ -1,0 +1,41 @@
+{
+    "update_id": 327247779,
+    "message": {
+        "message_id": 231,
+        "from": {
+            "id": 4813958,
+            "is_bot": false,
+            "first_name": "Дмитрий",
+            "last_name": "Смирнов",
+            "username": "Dmitry10x",
+            "language_code": "ru"
+        },
+        "chat": {
+            "id": 4813958,
+            "first_name": "Дмитрий",
+            "last_name": "Смирнов",
+            "username": "Dmitry10x",
+            "type": "private"
+        },
+        "date": 1585915339,
+        "reply_to_message": {
+            "message_id": 230,
+            "from": {
+                "id": 1194336597,
+                "is_bot": true,
+                "first_name": "Meditation",
+                "username": "meditation_tracker_bot"
+            },
+            "chat": {
+                "id": 4813958,
+                "first_name": "Дмитрий",
+                "last_name": "Смирнов",
+                "username": "Dmitry10x",
+                "type": "private"
+            },
+            "date": 1585915337,
+            "text": "How long are you going to meditate? (min):"
+        },
+        "text": "1"
+    }
+}

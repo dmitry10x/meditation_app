@@ -38,7 +38,7 @@ def send_first_screen(chat_id, msg='Main', show_finish_button=False):
     if show_finish_button == True:
         reply_keyboard_markup_keyboard = [['🖐 Finish meditation']]
     else:
-        reply_keyboard_markup_keyboard = [['🙌 Start meditation']] #, ['⚡️ Add meditation'], ['💡 Get stat']
+        reply_keyboard_markup_keyboard = [['🙌 Start meditation'], ['⚡️ Add meditation']] #, ['⚡️ Add meditation'], ['💡 Get stat']
 
     reply_keyboard_markup = {
             'keyboard': reply_keyboard_markup_keyboard, 'resize_keyboard': True,

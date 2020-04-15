@@ -15,8 +15,8 @@ def get_user(json_obj):
     return user
 
 def handle_message(user, client_answer):
-    message_id_to_reply = client_answer['message'].get('message_id')
-    client_msg = client_answer['message'].get('text')
+    message_id_to_reply = client_answer['message'].get('message_id') #message id
+    client_msg = client_answer['message'].get('text') #message text
 
     type_of_msg = lambda client_answer: 'reply' if client_answer['message'].get('reply_to_message') else 'ordinary_msg'
     type_of_msg = type_of_msg(client_answer)
@@ -37,9 +37,10 @@ def handle_message(user, client_answer):
                 tg.send_first_screen(user.telegram_id, msg, show_finish_button=True)
             else:
                 new_meditation = Meditation(user)
-                new_meditation.ask_for_duration(user, message_id_to_reply)
+                new_meditation.ask_for_duration(user, message_id_to_reply, 'new')
         elif client_msg == '⚡️ Add meditation':
-            pass
+            new_meditation = Meditation(user, was_added_after_session=1)
+            new_meditation.ask_for_duration(user, message_id_to_reply, 'old')
         elif client_msg == '💡 Get stat':
             pass
         elif client_msg == '🖐 Finish meditation':
@@ -50,14 +51,23 @@ def handle_message(user, client_answer):
                 msg = 'Nothing to finish'
                 tg.send_first_screen(user.telegram_id, msg)
     elif type_of_msg == 'reply':
+        print('we got reply')
         check = Meditation.check_if_not_finished_med_exists(user)
         if check['exist'] == True:
             try:
-                duration_minutes = int(client_msg)
+                reply = client_msg
                 meditation = check['meditation_obj']
-                meditation.start_meditation(user, duration_minutes)
-            except:
-                pass
+                if check['type'] == 0:
+                    print(0)
+                    meditation.start_meditation(user, int(reply))
+                elif check['type'] == 1:
+                    print(1)
+                    meditation.record_meditation(user, duration__day_month=reply)
+                    msg = 'Ok, your session was added'
+                    tg.send_first_screen(user.telegram_id, msg)
+
+            except Exception as e:
+                    raise
         else:
             pass
 
